@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -229,17 +228,179 @@ export const ResumeForm = ({ resumeData, updateResumeData, onNext }: ResumeFormP
                   <SelectTrigger>
                     <SelectValue placeholder="Select your profession" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="max-h-96 overflow-y-auto">
+                    {/* Technology & Engineering */}
                     <SelectItem value="software-engineer">Software Engineer</SelectItem>
                     <SelectItem value="data-scientist">Data Scientist</SelectItem>
+                    <SelectItem value="web-developer">Web Developer</SelectItem>
+                    <SelectItem value="mobile-developer">Mobile Developer</SelectItem>
+                    <SelectItem value="devops-engineer">DevOps Engineer</SelectItem>
+                    <SelectItem value="cybersecurity-analyst">Cybersecurity Analyst</SelectItem>
+                    <SelectItem value="cloud-architect">Cloud Architect</SelectItem>
+                    <SelectItem value="ai-engineer">AI/ML Engineer</SelectItem>
+                    <SelectItem value="systems-administrator">Systems Administrator</SelectItem>
+                    <SelectItem value="network-engineer">Network Engineer</SelectItem>
+                    <SelectItem value="qa-engineer">QA Engineer</SelectItem>
+                    <SelectItem value="technical-writer">Technical Writer</SelectItem>
+                    
+                    {/* Business & Management */}
                     <SelectItem value="product-manager">Product Manager</SelectItem>
-                    <SelectItem value="marketing-manager">Marketing Manager</SelectItem>
-                    <SelectItem value="sales-manager">Sales Manager</SelectItem>
-                    <SelectItem value="financial-analyst">Financial Analyst</SelectItem>
-                    <SelectItem value="graphic-designer">Graphic Designer</SelectItem>
                     <SelectItem value="project-manager">Project Manager</SelectItem>
-                    <SelectItem value="hr-manager">HR Manager</SelectItem>
                     <SelectItem value="business-analyst">Business Analyst</SelectItem>
+                    <SelectItem value="operations-manager">Operations Manager</SelectItem>
+                    <SelectItem value="general-manager">General Manager</SelectItem>
+                    <SelectItem value="ceo">CEO/Executive</SelectItem>
+                    <SelectItem value="consultant">Management Consultant</SelectItem>
+                    <SelectItem value="strategy-manager">Strategy Manager</SelectItem>
+                    <SelectItem value="program-manager">Program Manager</SelectItem>
+                    
+                    {/* Marketing & Sales */}
+                    <SelectItem value="marketing-manager">Marketing Manager</SelectItem>
+                    <SelectItem value="digital-marketer">Digital Marketing Specialist</SelectItem>
+                    <SelectItem value="content-marketer">Content Marketing Manager</SelectItem>
+                    <SelectItem value="seo-specialist">SEO Specialist</SelectItem>
+                    <SelectItem value="social-media-manager">Social Media Manager</SelectItem>
+                    <SelectItem value="sales-manager">Sales Manager</SelectItem>
+                    <SelectItem value="sales-representative">Sales Representative</SelectItem>
+                    <SelectItem value="account-manager">Account Manager</SelectItem>
+                    <SelectItem value="business-development">Business Development</SelectItem>
+                    <SelectItem value="brand-manager">Brand Manager</SelectItem>
+                    <SelectItem value="public-relations">Public Relations Specialist</SelectItem>
+                    
+                    {/* Finance & Accounting */}
+                    <SelectItem value="financial-analyst">Financial Analyst</SelectItem>
+                    <SelectItem value="accountant">Accountant</SelectItem>
+                    <SelectItem value="investment-banker">Investment Banker</SelectItem>
+                    <SelectItem value="financial-advisor">Financial Advisor</SelectItem>
+                    <SelectItem value="treasury-analyst">Treasury Analyst</SelectItem>
+                    <SelectItem value="risk-analyst">Risk Analyst</SelectItem>
+                    <SelectItem value="auditor">Auditor</SelectItem>
+                    <SelectItem value="tax-specialist">Tax Specialist</SelectItem>
+                    <SelectItem value="budget-analyst">Budget Analyst</SelectItem>
+                    <SelectItem value="credit-analyst">Credit Analyst</SelectItem>
+                    
+                    {/* Healthcare & Medical */}
+                    <SelectItem value="physician">Physician</SelectItem>
+                    <SelectItem value="nurse">Nurse</SelectItem>
+                    <SelectItem value="pharmacist">Pharmacist</SelectItem>
+                    <SelectItem value="physical-therapist">Physical Therapist</SelectItem>
+                    <SelectItem value="medical-technician">Medical Technician</SelectItem>
+                    <SelectItem value="healthcare-administrator">Healthcare Administrator</SelectItem>
+                    <SelectItem value="medical-researcher">Medical Researcher</SelectItem>
+                    <SelectItem value="dentist">Dentist</SelectItem>
+                    <SelectItem value="veterinarian">Veterinarian</SelectItem>
+                    <SelectItem value="psychologist">Psychologist</SelectItem>
+                    
+                    {/* Education */}
+                    <SelectItem value="teacher">Teacher</SelectItem>
+                    <SelectItem value="professor">Professor</SelectItem>
+                    <SelectItem value="principal">Principal/Administrator</SelectItem>
+                    <SelectItem value="curriculum-developer">Curriculum Developer</SelectItem>
+                    <SelectItem value="education-coordinator">Education Coordinator</SelectItem>
+                    <SelectItem value="librarian">Librarian</SelectItem>
+                    <SelectItem value="student-counselor">Student Counselor</SelectItem>
+                    <SelectItem value="training-specialist">Training Specialist</SelectItem>
+                    
+                    {/* Creative & Design */}
+                    <SelectItem value="graphic-designer">Graphic Designer</SelectItem>
+                    <SelectItem value="ui-ux-designer">UI/UX Designer</SelectItem>
+                    <SelectItem value="web-designer">Web Designer</SelectItem>
+                    <SelectItem value="interior-designer">Interior Designer</SelectItem>
+                    <SelectItem value="artist">Artist</SelectItem>
+                    <SelectItem value="photographer">Photographer</SelectItem>
+                    <SelectItem value="videographer">Videographer</SelectItem>
+                    <SelectItem value="animator">Animator</SelectItem>
+                    <SelectItem value="creative-director">Creative Director</SelectItem>
+                    <SelectItem value="copywriter">Copywriter</SelectItem>
+                    
+                    {/* Human Resources */}
+                    <SelectItem value="hr-manager">HR Manager</SelectItem>
+                    <SelectItem value="recruiter">Recruiter</SelectItem>
+                    <SelectItem value="hr-generalist">HR Generalist</SelectItem>
+                    <SelectItem value="compensation-analyst">Compensation Analyst</SelectItem>
+                    <SelectItem value="employee-relations">Employee Relations Specialist</SelectItem>
+                    <SelectItem value="training-manager">Training Manager</SelectItem>
+                    <SelectItem value="talent-acquisition">Talent Acquisition Specialist</SelectItem>
+                    
+                    {/* Legal */}
+                    <SelectItem value="lawyer">Lawyer</SelectItem>
+                    <SelectItem value="paralegal">Paralegal</SelectItem>
+                    <SelectItem value="legal-assistant">Legal Assistant</SelectItem>
+                    <SelectItem value="compliance-officer">Compliance Officer</SelectItem>
+                    <SelectItem value="contract-specialist">Contract Specialist</SelectItem>
+                    <SelectItem value="legal-counsel">Legal Counsel</SelectItem>
+                    
+                    {/* Manufacturing & Operations */}
+                    <SelectItem value="manufacturing-engineer">Manufacturing Engineer</SelectItem>
+                    <SelectItem value="quality-assurance">Quality Assurance Specialist</SelectItem>
+                    <SelectItem value="production-manager">Production Manager</SelectItem>
+                    <SelectItem value="supply-chain-manager">Supply Chain Manager</SelectItem>
+                    <SelectItem value="logistics-coordinator">Logistics Coordinator</SelectItem>
+                    <SelectItem value="warehouse-manager">Warehouse Manager</SelectItem>
+                    <SelectItem value="procurement-specialist">Procurement Specialist</SelectItem>
+                    
+                    {/* Customer Service & Support */}
+                    <SelectItem value="customer-service-representative">Customer Service Representative</SelectItem>
+                    <SelectItem value="customer-success-manager">Customer Success Manager</SelectItem>
+                    <SelectItem value="support-specialist">Support Specialist</SelectItem>
+                    <SelectItem value="call-center-manager">Call Center Manager</SelectItem>
+                    <SelectItem value="client-relations">Client Relations Manager</SelectItem>
+                    
+                    {/* Real Estate & Construction */}
+                    <SelectItem value="real-estate-agent">Real Estate Agent</SelectItem>
+                    <SelectItem value="property-manager">Property Manager</SelectItem>
+                    <SelectItem value="construction-manager">Construction Manager</SelectItem>
+                    <SelectItem value="architect">Architect</SelectItem>
+                    <SelectItem value="civil-engineer">Civil Engineer</SelectItem>
+                    <SelectItem value="electrical-engineer">Electrical Engineer</SelectItem>
+                    <SelectItem value="mechanical-engineer">Mechanical Engineer</SelectItem>
+                    
+                    {/* Media & Communications */}
+                    <SelectItem value="journalist">Journalist</SelectItem>
+                    <SelectItem value="editor">Editor</SelectItem>
+                    <SelectItem value="communications-specialist">Communications Specialist</SelectItem>
+                    <SelectItem value="broadcast-technician">Broadcast Technician</SelectItem>
+                    <SelectItem value="media-producer">Media Producer</SelectItem>
+                    
+                    {/* Research & Science */}
+                    <SelectItem value="research-scientist">Research Scientist</SelectItem>
+                    <SelectItem value="lab-technician">Lab Technician</SelectItem>
+                    <SelectItem value="environmental-scientist">Environmental Scientist</SelectItem>
+                    <SelectItem value="biomedical-researcher">Biomedical Researcher</SelectItem>
+                    <SelectItem value="chemist">Chemist</SelectItem>
+                    <SelectItem value="physicist">Physicist</SelectItem>
+                    
+                    {/* Hospitality & Tourism */}
+                    <SelectItem value="hotel-manager">Hotel Manager</SelectItem>
+                    <SelectItem value="event-planner">Event Planner</SelectItem>
+                    <SelectItem value="travel-agent">Travel Agent</SelectItem>
+                    <SelectItem value="restaurant-manager">Restaurant Manager</SelectItem>
+                    <SelectItem value="chef">Chef</SelectItem>
+                    <SelectItem value="concierge">Concierge</SelectItem>
+                    
+                    {/* Transportation & Logistics */}
+                    <SelectItem value="pilot">Pilot</SelectItem>
+                    <SelectItem value="truck-driver">Truck Driver</SelectItem>
+                    <SelectItem value="logistics-manager">Logistics Manager</SelectItem>
+                    <SelectItem value="fleet-manager">Fleet Manager</SelectItem>
+                    <SelectItem value="transportation-coordinator">Transportation Coordinator</SelectItem>
+                    
+                    {/* Non-Profit & Social Services */}
+                    <SelectItem value="social-worker">Social Worker</SelectItem>
+                    <SelectItem value="program-coordinator">Program Coordinator</SelectItem>
+                    <SelectItem value="fundraising-coordinator">Fundraising Coordinator</SelectItem>
+                    <SelectItem value="community-outreach">Community Outreach Specialist</SelectItem>
+                    <SelectItem value="case-manager">Case Manager</SelectItem>
+                    
+                    {/* Government & Public Service */}
+                    <SelectItem value="policy-analyst">Policy Analyst</SelectItem>
+                    <SelectItem value="government-administrator">Government Administrator</SelectItem>
+                    <SelectItem value="public-affairs">Public Affairs Specialist</SelectItem>
+                    <SelectItem value="urban-planner">Urban Planner</SelectItem>
+                    <SelectItem value="law-enforcement">Law Enforcement Officer</SelectItem>
+                    
+                    {/* Other */}
+                    <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
