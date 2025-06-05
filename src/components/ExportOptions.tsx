@@ -6,6 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Download, FileText, Globe, File, CheckCircle } from 'lucide-react';
 import { ResumeData } from '@/pages/Index';
 import { ResumeTemplate } from '@/components/ResumeTemplate';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 interface ExportOptionsProps {
   resumeData: ResumeData;
@@ -15,27 +17,48 @@ interface ExportOptionsProps {
 export const ExportOptions = ({ resumeData, onPrev }: ExportOptionsProps) => {
   const [exportStatus, setExportStatus] = useState<string | null>(null);
 
-  const exportToPDF = () => {
+  const exportToPDF = async () => {
     setExportStatus('pdf');
-    // Simulate PDF generation
-    setTimeout(() => {
+    try {
       const resumeElement = document.getElementById('resume-for-export');
       if (resumeElement) {
-        // In a real implementation, you would use libraries like jsPDF or html2pdf
-        console.log('Exporting to PDF...');
-        // Create a simulated download
-        const blob = new Blob(['PDF content would be here'], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${resumeData.personalInfo.fullName.replace(/\s+/g, '_')}_Resume.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        // Create canvas from HTML element
+        const canvas = await html2canvas(resumeElement, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#ffffff'
+        });
+        
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        const imgWidth = 210; // A4 width in mm
+        const pageHeight = 295; // A4 height in mm
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        
+        let position = 0;
+        
+        // Add first page
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+        
+        // Add additional pages if needed
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+        
+        pdf.save(`${resumeData.personalInfo.fullName.replace(/\s+/g, '_')}_Resume.pdf`);
       }
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
       setExportStatus(null);
-    }, 2000);
+    }
   };
 
   const exportToHTML = () => {
@@ -49,9 +72,14 @@ export const ExportOptions = ({ resumeData, onPrev }: ExportOptionsProps) => {
 <head>
     <meta charset="UTF-8">
     <title>${resumeData.personalInfo.fullName} - Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
         .resume { max-width: 800px; margin: 0 auto; }
+        @media print {
+          body { margin: 0; padding: 0; }
+          .resume { max-width: none; }
+        }
     </style>
 </head>
 <body>
@@ -78,19 +106,37 @@ export const ExportOptions = ({ resumeData, onPrev }: ExportOptionsProps) => {
   const exportToDOCX = () => {
     setExportStatus('docx');
     setTimeout(() => {
-      // In a real implementation, you would use libraries like docx or html-docx-js
-      console.log('Exporting to DOCX...');
-      const blob = new Blob(['DOCX content would be here'], { 
-        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
-      });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${resumeData.personalInfo.fullName.replace(/\s+/g, '_')}_Resume.docx`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const resumeElement = document.getElementById('resume-for-export');
+      if (resumeElement) {
+        // Create a basic Word-compatible HTML structure
+        const docxContent = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
+<head>
+  <meta charset="utf-8">
+  <title>${resumeData.personalInfo.fullName} Resume</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+    h1, h2, h3 { color: #333; }
+    .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; }
+  </style>
+</head>
+<body>
+  ${resumeElement.innerHTML}
+</body>
+</html>`;
+        
+        const blob = new Blob([docxContent], { 
+          type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${resumeData.personalInfo.fullName.replace(/\s+/g, '_')}_Resume.docx`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
       setExportStatus(null);
     }, 2000);
   };
