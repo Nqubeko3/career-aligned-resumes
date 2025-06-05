@@ -48,6 +48,20 @@ const templates = [
     description: 'Time-tested format favored by traditional industries',
     preview: 'bg-white border-2 border-black'
   },
+  {
+    id: 'professional-academic',
+    name: 'Academic',
+    category: 'Professional',
+    description: 'Structured format ideal for research and academic positions',
+    preview: 'bg-blue-25 border-2 border-blue-200'
+  },
+  {
+    id: 'professional-modern',
+    name: 'Modern Professional',
+    category: 'Professional',
+    description: 'Contemporary sidebar layout with clean sections',
+    preview: 'bg-gradient-to-r from-gray-100 to-gray-200 border-2 border-gray-400'
+  },
   // Modern Templates
   {
     id: 'modern-creative',
@@ -60,8 +74,8 @@ const templates = [
     id: 'modern-tech',
     name: 'Tech Forward',
     category: 'Modern',
-    description: 'Contemporary style perfect for tech industry',
-    preview: 'bg-gradient-to-br from-blue-100 to-cyan-100 border-2 border-blue-300'
+    description: 'Dark theme perfect for tech and development roles',
+    preview: 'bg-gradient-to-br from-gray-800 to-blue-900 border-2 border-cyan-400'
   },
   {
     id: 'modern-designer',
@@ -69,6 +83,13 @@ const templates = [
     category: 'Modern',
     description: 'Visual-first approach for design professionals',
     preview: 'bg-gradient-to-br from-orange-100 to-red-100 border-2 border-orange-300'
+  },
+  {
+    id: 'modern-minimalist',
+    name: 'Ultra Minimalist',
+    category: 'Modern',
+    description: 'Clean, spacious design with maximum white space',
+    preview: 'bg-white border border-gray-200'
   }
 ];
 
@@ -77,10 +98,10 @@ export const TemplateSelector = ({ selectedTemplate, onSelectTemplate, onNext, o
   const modernTemplates = templates.filter(t => t.category === 'Modern');
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Choose Your Template</h2>
-        <p className="text-lg text-gray-600">Select a professional template that matches your industry and style</p>
+        <p className="text-lg text-gray-600">Select from our collection of ATS-optimized templates designed for different industries</p>
       </div>
 
       {/* Professional Templates */}
@@ -88,33 +109,34 @@ export const TemplateSelector = ({ selectedTemplate, onSelectTemplate, onNext, o
         <div className="flex items-center space-x-2 mb-6">
           <h3 className="text-2xl font-semibold text-gray-800">Professional Templates</h3>
           <Badge variant="secondary">ATS-Optimized</Badge>
+          <Badge variant="outline">{professionalTemplates.length} Options</Badge>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {professionalTemplates.map((template) => (
             <Card 
               key={template.id}
-              className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-105 ${
                 selectedTemplate === template.id ? 'ring-2 ring-blue-500 shadow-lg' : ''
               }`}
               onClick={() => onSelectTemplate(template.id)}
             >
-              <CardContent className="p-6">
-                <div className={`w-full h-48 rounded-lg mb-4 ${template.preview} flex items-center justify-center relative`}>
+              <CardContent className="p-4">
+                <div className={`w-full h-40 rounded-lg mb-3 ${template.preview} flex items-center justify-center relative overflow-hidden`}>
                   {selectedTemplate === template.id && (
                     <div className="absolute top-2 right-2 bg-blue-500 text-white rounded-full p-1">
                       <Check className="w-4 h-4" />
                     </div>
                   )}
-                  <div className="text-center p-4">
-                    <div className="w-full h-3 bg-gray-300 rounded mb-2"></div>
-                    <div className="w-3/4 h-2 bg-gray-200 rounded mb-1"></div>
-                    <div className="w-2/3 h-2 bg-gray-200 rounded mb-3"></div>
-                    <div className="w-full h-2 bg-gray-200 rounded mb-1"></div>
-                    <div className="w-5/6 h-2 bg-gray-200 rounded"></div>
+                  <div className="text-center p-3 w-full">
+                    <div className="w-full h-2 bg-gray-300 rounded mb-2"></div>
+                    <div className="w-3/4 h-1.5 bg-gray-200 rounded mb-1 mx-auto"></div>
+                    <div className="w-2/3 h-1.5 bg-gray-200 rounded mb-2 mx-auto"></div>
+                    <div className="w-full h-1 bg-gray-200 rounded mb-1"></div>
+                    <div className="w-5/6 h-1 bg-gray-200 rounded mx-auto"></div>
                   </div>
                 </div>
-                <h4 className="font-semibold text-lg mb-2">{template.name}</h4>
-                <p className="text-gray-600 text-sm">{template.description}</p>
+                <h4 className="font-semibold text-sm mb-1">{template.name}</h4>
+                <p className="text-gray-600 text-xs">{template.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -126,33 +148,34 @@ export const TemplateSelector = ({ selectedTemplate, onSelectTemplate, onNext, o
         <div className="flex items-center space-x-2 mb-6">
           <h3 className="text-2xl font-semibold text-gray-800">Modern Templates</h3>
           <Badge variant="outline">Creative Industries</Badge>
+          <Badge variant="outline">{modernTemplates.length} Options</Badge>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {modernTemplates.map((template) => (
             <Card 
               key={template.id}
-              className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-105 ${
                 selectedTemplate === template.id ? 'ring-2 ring-blue-500 shadow-lg' : ''
               }`}
               onClick={() => onSelectTemplate(template.id)}
             >
-              <CardContent className="p-6">
-                <div className={`w-full h-48 rounded-lg mb-4 ${template.preview} flex items-center justify-center relative`}>
+              <CardContent className="p-4">
+                <div className={`w-full h-40 rounded-lg mb-3 ${template.preview} flex items-center justify-center relative overflow-hidden`}>
                   {selectedTemplate === template.id && (
                     <div className="absolute top-2 right-2 bg-blue-500 text-white rounded-full p-1">
                       <Check className="w-4 h-4" />
                     </div>
                   )}
-                  <div className="text-center p-4">
-                    <div className="w-full h-3 bg-white bg-opacity-50 rounded mb-2"></div>
-                    <div className="w-3/4 h-2 bg-white bg-opacity-40 rounded mb-1"></div>
-                    <div className="w-2/3 h-2 bg-white bg-opacity-40 rounded mb-3"></div>
-                    <div className="w-full h-2 bg-white bg-opacity-40 rounded mb-1"></div>
-                    <div className="w-5/6 h-2 bg-white bg-opacity-40 rounded"></div>
+                  <div className="text-center p-3 w-full">
+                    <div className="w-full h-2 bg-white bg-opacity-60 rounded mb-2"></div>
+                    <div className="w-3/4 h-1.5 bg-white bg-opacity-50 rounded mb-1 mx-auto"></div>
+                    <div className="w-2/3 h-1.5 bg-white bg-opacity-50 rounded mb-2 mx-auto"></div>
+                    <div className="w-full h-1 bg-white bg-opacity-40 rounded mb-1"></div>
+                    <div className="w-5/6 h-1 bg-white bg-opacity-40 rounded mx-auto"></div>
                   </div>
                 </div>
-                <h4 className="font-semibold text-lg mb-2">{template.name}</h4>
-                <p className="text-gray-600 text-sm">{template.description}</p>
+                <h4 className="font-semibold text-sm mb-1">{template.name}</h4>
+                <p className="text-gray-600 text-xs">{template.description}</p>
               </CardContent>
             </Card>
           ))}
