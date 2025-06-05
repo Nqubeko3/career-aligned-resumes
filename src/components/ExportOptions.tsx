@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -5,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Download, FileText, Globe, File, CheckCircle } from 'lucide-react';
 import { ResumeData } from '@/pages/Index';
 import { ResumeTemplate } from '@/components/ResumeTemplate';
-import { jsPDF } from 'jspdf';
+import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 interface ExportOptionsProps {
